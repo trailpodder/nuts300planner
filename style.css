@@ -12,3 +12,27 @@
   height: 400px;
   margin-top: 20px;
 }
+
+#trailSciBot {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+#chatDisplay {
+  height: 200px;
+  border: 1px solid #eee;
+  padding: 10px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+}
+
+#userInput {
+  width: calc(100% - 60px);
+  padding: 5px;
+}
+
+#sendMessageBtn {
+  width: 50px;
+  padding: 5px;
+}

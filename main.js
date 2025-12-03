@@ -462,6 +462,45 @@ function initialize() {
     });
 
   document.getElementById('generatePlanBtn').addEventListener('click', generatePacingPlan);
+  document.getElementById('sendMessageBtn').addEventListener('click', sendMessage);
+}
+
+function sendMessage() {
+  const userInput = document.getElementById('userInput');
+  const message = userInput.value.trim();
+  if (message) {
+    displayMessage('User', message);
+    getBotResponse(message);
+    userInput.value = '';
+  }
+}
+
+function displayMessage(sender, message) {
+  const chatDisplay = document.getElementById('chatDisplay');
+  const messageElement = document.createElement('p');
+  messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+  chatDisplay.appendChild(messageElement);
+  chatDisplay.scrollTop = chatDisplay.scrollHeight;
+}
+
+const knowledgeBase = {
+  "training": "Training for an ultra-trail race involves a combination of long runs, hill workouts, and strength training. It's important to gradually increase your mileage to avoid injury.",
+  "racing": "Race day strategy is crucial. Pacing, nutrition, and hydration are key factors to consider. Make sure to study the course and aid station locations beforehand.",
+  "nutrition": "Proper nutrition is essential for performance and recovery. Carbohydrates are your primary fuel source, but protein and fats are also important. Practice your nutrition plan during training.",
+  "recovery": "Recovery is just as important as training. It includes adequate sleep, proper nutrition, and active recovery methods like stretching and foam rolling.",
+  "rehab": "Injuries are common in ultra-trail running. Common injuries include runner's knee, IT band syndrome, and plantar fasciitis. Proper rehab and cross-training are crucial for a safe return to running.",
+  "cognition": "Mental fitness is a key aspect of ultra-trail running. Visualization, positive self-talk, and mindfulness can help you overcome the mental challenges of a long race.",
+};
+
+function getBotResponse(message) {
+  const lowerCaseMessage = message.toLowerCase();
+  for (const keyword in knowledgeBase) {
+    if (lowerCaseMessage.includes(keyword)) {
+      displayMessage('Bot', knowledgeBase[keyword]);
+      return;
+    }
+  }
+  displayMessage('Bot', "Sorry, I don't have information on that topic. Please ask about training, racing, nutrition, recovery, rehab, or cognition.");
 }
 
 document.addEventListener("DOMContentLoaded", initialize);
